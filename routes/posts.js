@@ -10,13 +10,24 @@ router.get('/', (req, res) => {
     })
   });
 });
+router.get('/:id', function(req, res) {
+  Post.find(function(err, posts) {
+    posts.forEach(post => {
+      if (post._id == req.params.id) {
+        let matchedPost = post;
+        res.render('post', {post: matchedPost});
+      } else {
+         console.log('Couldnt compare');
+      }
+    })
+  });
+});
 
 router.post('/', (req, res) => {
   var post = new Post();
   post.name = req.body.name;
   post.content = req.body.content;
   post.order = req.body.order;
-
   // Save the post and check for errors
   post.save( (err) => {
     if (err)

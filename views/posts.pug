@@ -1,35 +1,28 @@
-doctype html
-html(lang='en')
-	head
-		meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
-		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-		meta(name='description', content='')
-		meta(name='author', content='')
-		title Signin Template for Bootstrap
-		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
-		body.text-center
-			.container.mt-5.text-left
-				h1 Posts route
-				ul.list-group
-					each post in posts
-						li.list-group-item
-							span.mr-3="name:" + post.name
-							span.mr-3="content:" + post.content
-							span.mr-3="order:" + post.order
-							a(href='') Show
-				form.form-signin(method='POST', action='http://localhost:3000/posts')
-					h1.h3.mb-3.font-weight-normal Create a new Post
+extends layout.pug
+block content
+	body.text-center
+		.container.mt-5.text-left
+			h1 Posts route
+			ul.list-group
+				each post in posts
+					li.list-group-item
+						span.mr-3="name:" + post.name
+						span.mr-3="content:" + post.content
+						span.mr-3="order:" + post.order
+						a(href='/posts/'+post._id) Show
+			form.form-signin(method='POST', action='http://localhost:3000/posts')
+				h1.h3.mb-3.font-weight-normal Create a new Post
+				
+				.mb-3
+					label.sr-only(for='inputName') Name
+					input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='')
 					
-					.mb-3
-						label.sr-only(for='inputName') Name
-						input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='')
-						
-					.mb-3
-						label.sr-only(for='inputContent') Content
-						textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='')
-					.mb-3
-						label.sr-only(for='inputContent') Order
-						input#inputOrder.form-control(name='name', type='text', placeholder='Order', required='', autofocus='')
-						
-					button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
-					p.mt-5.mb-3.text-muted © 2017-2018					
+				.mb-3
+					label.sr-only(for='inputContent') Content
+					textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='')
+				.mb-3
+					label.sr-only(for='inputContent') Order
+					input#inputOrder.form-control(name='name', type='text', placeholder='Order', required='', autofocus='')
+					
+				button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+				p.mt-5.mb-3.text-muted © 2017-2018					

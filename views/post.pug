@@ -1,0 +1,8 @@
+extends layout.pug
+block content
+	div.container
+		h4.capitalize= post.name
+		ul.collection
+					li.collection-item
+						p= post.content
+						small= post.order
