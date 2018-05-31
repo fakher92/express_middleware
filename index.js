@@ -1,8 +1,12 @@
 require('dotenv').config();
 
 var express = require('express');
+var methodOverride = require('method-override')
 var app = express();
 var bodyParser = require('body-parser');
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 //To parse URL encoded data
 app.use(bodyParser.urlencoded({ extended: false }))

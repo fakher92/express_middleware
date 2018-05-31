@@ -10,6 +10,8 @@ block content
 						span.mr-3="content:" + post.content
 						span.mr-3="order:" + post.order
 						a(href='/posts/'+post._id) Show
+						form(method='POST', action='/posts/delete/'+post._id+'?_method=DELETE')
+							button(type='submit') Delete
 			form.form-signin(method='POST', action='http://localhost:3000/posts')
 				h1.h3.mb-3.font-weight-normal Create a new Post
 				

@@ -23,6 +23,20 @@ router.get('/:id', function(req, res) {
   });
 });
 
+router.delete('/delete/:id', (req, res) => {
+  Post.remove({
+    _id: req.params.id
+  }, (err, post) => {
+    if (err)
+      res.send(err);
+    console.log('Post deleted');
+
+  });
+  //redirect to /posts
+  res.redirect("/posts");
+});
+
+
 router.post('/', (req, res) => {
   var post = new Post();
   post.name = req.body.name;
