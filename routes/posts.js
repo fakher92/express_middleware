@@ -23,6 +23,7 @@ router.get('/:id', function(req, res) {
   });
 });
 
+// delete the post with this id
 router.delete('/delete/:id', (req, res) => {
   Post.remove({
     _id: req.params.id
@@ -32,9 +33,43 @@ router.delete('/delete/:id', (req, res) => {
     console.log('Post deleted');
 
   });
-  //redirect to /posts
-  res.redirect("/posts");
+   
 });
+
+// update the post with this id
+router.get('/edit/:id', function(req, res) {
+
+  // use our post model to find the post we want
+  Post.findById(req.params.id, function(err, post) {
+    if (err)
+      res.send(err);
+    console.log(post);
+    res.render('edit', {post: post});
+
+    });
+  });
+
+router.put('/submit/:id', function(req, res) {
+  Post.findById(req.params.id, function(err, post) {
+
+    if (err)
+      res.send(err);
+
+    post.name = req.body.name;  // update the posts info
+    post.content = req.body.content;  // update the posts info
+    post.order = req.body.order;  // update the posts info
+
+    // save the post
+    post.save(function(err) {
+      if (err)
+        res.send(err);
+
+      console.log("Post updated:", post);
+      res.redirect('/posts');
+    });
+
+  });
+})
 
 
 router.post('/', (req, res) => {
